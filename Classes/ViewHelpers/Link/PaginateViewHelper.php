@@ -35,12 +35,14 @@ class PaginateViewHelper extends AbstractTagBasedViewHelper
     {
         $paginationId = (string) $this->arguments['paginationId'];
         $paginationPage = (int) $this->arguments['paginationPage'];
-        $section = isset($this->arguments['section']) ? (string)$this->arguments['section'] : '';
 
         $arguments = [];
         if ($paginationPage > 1) {
             $arguments['paginate'][$paginationId]['page'] = $paginationPage;
         }
+
+        $content = $this->renderChildren();
+        $content = is_string($content) ? $content : '';
 
         if (method_exists($this->renderingContext, 'getUriBuilder')) {
             /** @var UriBuilder $uriBuilder */
@@ -49,7 +51,7 @@ class PaginateViewHelper extends AbstractTagBasedViewHelper
             /** @var UriBuilder $uriBuilder */
             $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
         } else {
-            return $this->renderChildren();
+            return $content;
         }
 
         $uriBuilder->reset()->setArguments($arguments);
@@ -57,11 +59,11 @@ class PaginateViewHelper extends AbstractTagBasedViewHelper
         $uri = $uriBuilder->build();
         if ($uri !== '') {
             $this->tag->addAttribute('href', $uri);
-            $this->tag->setContent($this->renderChildren());
+            $this->tag->setContent($content);
             $this->tag->forceClosingTag(true);
             $result = $this->tag->render();
         } else {
-            $result = $this->renderChildren();
+            $result = $content;
         }
 
         return $result;

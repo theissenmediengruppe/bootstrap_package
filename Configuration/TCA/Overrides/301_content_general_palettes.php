@@ -7,7 +7,9 @@
  * LICENSE file that was distributed with this source code.
  */
 
-defined('TYPO3') or die('Access denied.');
+if (!defined('TYPO3')) {
+    die('Access denied.');
+}
 
 // Add Palettes for Generic usage
 $GLOBALS['TCA']['tt_content']['palettes']['header_minimal'] = [

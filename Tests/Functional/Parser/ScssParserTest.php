@@ -21,7 +21,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 class ScssParserTest extends FunctionalTestCase
 {
     /**
-     * @var array
+     * @var array<string>
      */
     protected $testExtensionsToLoad = [
         'typo3conf/ext/bootstrap_package',

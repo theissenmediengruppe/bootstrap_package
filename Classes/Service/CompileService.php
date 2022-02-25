@@ -67,6 +67,7 @@ class CompileService
             && is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/bootstrap-package/css']['parser'])
         ) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/bootstrap-package/css']['parser'] as $className) {
+                /** @phpstan-ignore-next-line */
                 $parser = GeneralUtility::makeInstance($className);
                 if ($parser instanceof ParserInterface
                     && isset($settings['file']['info']['extension'])

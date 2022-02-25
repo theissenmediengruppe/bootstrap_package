@@ -32,6 +32,7 @@ class BrandingService
                 ExtensionConfiguration::class
             );
             $backendConfiguration = $extensionConfiguration->get('backend');
+            $backendConfiguration = is_array($backendConfiguration) ? $backendConfiguration : [];
 
             if (!isset($backendConfiguration['loginLogo']) || trim($backendConfiguration['loginLogo']) === '') {
                 $backendConfiguration['loginLogo'] = 'EXT:bootstrap_package/Resources/Public/Images/Backend/login-logo.svg';
